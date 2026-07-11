@@ -1,6 +1,6 @@
 class Solution:
     def findLongestChain(self, pairs: List[List[int]]) -> int:
-        pairs.sort()
+        # pairs.sort()
         # def func(index,prev):
         #     if index==len(pairs):
         #         return 0
@@ -15,10 +15,20 @@ class Solution:
         #     return ans
         # memo={}
         # return func(0,-1)
-        n=len(pairs)
-        dp=[1]*n
-        for index in range(1,n):
-            for prev in range(index):
-                if pairs[index][0]>pairs[prev][1]:
-                    dp[index]=max(dp[index],dp[prev]+1)
-        return max(dp)
+
+        # n=len(pairs)
+        # dp=[1]*n
+        # for index in range(1,n):
+        #     for prev in range(index):
+        #         if pairs[index][0]>pairs[prev][1]:
+        #             dp[index]=max(dp[index],dp[prev]+1)
+        # return max(dp)
+
+        pairs.sort(key=lambda x: x[1])
+        count=0
+        end=-float('inf')
+        for u,v in pairs:
+            if u >end:
+                count+=1
+                end=v
+        return count
